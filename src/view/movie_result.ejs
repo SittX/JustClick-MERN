@@ -10,18 +10,33 @@
   </head>
   <body>
     <%- include('./partials/navbar.ejs') %>
+    <div class="container">
+      <form action="/movie_details" method="POST">
+        <input
+          type="text"
+          class="form-control"
+          name="movie_id"
+          placeholder="Grab the imdbID and put it here!"
+        />
+      </form>
+    </div>
     <div class="grid_container">
       <% movies.forEach(movie => { %>
       <div class="grid-items">
-        <h4 style="text-align: center"><%= movie.Title %></h4>
-        <img
-          src="<%=movie.Poster%>"
-          class="poster"
-          style="margin-right: auto"
-        />
+        <h5 style="text-align: center"><%= movie.Title %></h5>
+        <img src="<%=movie.Poster%>" class="poster" style="margin-left: 30%" />
+        <p style="text-align: center; margin-top: 10px">
+          imdbID : <%= movie.imdbID %>
+        </p>
       </div>
       <% })%>
     </div>
+    <script>
+      //Set imdbID to the local storage ,So that we can access it from other files
+      const movie_id = (id) => {
+        localStorage.setItem("imdbID", movie.imdbID);
+      };
+    </script>
     <%- include('./partials/jQuery.ejs') %>
   </body>
 </html>

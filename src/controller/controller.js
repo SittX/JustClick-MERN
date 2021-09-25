@@ -17,7 +17,6 @@ exports.movie_result = (req, res) => {
     .then((data) => {
       var movies = data.Search;
       res.render("movie_result", { movies });
-      localStorage.setItem("imdbID", movies.imbdID);
       // console.log(movies);
     })
     .catch((err) => console.error(err));
@@ -30,10 +29,15 @@ exports.anime_result = (req, res) => {
     .then((data) => {
       var animes = data.results;
       res.render("anime_result", { animes });
-      console.log(animes);
+      // console.log(animes);
     })
     .catch((err) => console.error(err));
 };
-exports.k_seriesPage = (req, res) => {
-  res.render("k_series");
+
+exports.movie_details = (req, res) => {
+  // console.log( req.body);
+  model.movie_details(req.body.movie_id).then((data) => {
+    res.render("movie_details", { data });
+    // console.log(data);
+  });
 };

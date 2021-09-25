@@ -1,0 +1,32 @@
+body {
+  background-color: #333;
+  color: palevioletred;
+  font-family: "Oswald";
+  color: antiquewhite;
+}
+#movie_info {
+  box-sizing: border-box;
+}
+.heading_info {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+.title_info {
+  margin-top: 8%;
+}
+.title_info * {
+  margin-bottom: 20px;
+  padding: 1rem;
+  font-size: 25px;
+}
+.main_info {
+  margin: 1rem;
+}
+.main_info .plot {
+  font-size: 28px;
+}
+.rating {
+  display: flex;
+  justify-content: space-evenly;
+}

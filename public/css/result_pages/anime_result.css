@@ -1,6 +1,7 @@
 body {
   background-color: #333;
   color: whitesmoke;
+  box-sizing: border-box;
 }
 .navbar-nav {
   position: relative;
@@ -10,14 +11,13 @@ body {
   position: relative;
   width: 150px;
   height: 180px;
-  margin-left: 8em;
+  margin-left: 20px;
 }
 .grid_container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-auto-rows: minmax(100px, auto);
   margin-top: 2rem;
-  padding: 20px;
 }
 .grid-items {
   border-bottom: solid 2px black;
