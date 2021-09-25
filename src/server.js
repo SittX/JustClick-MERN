@@ -1,8 +1,8 @@
 const express = require("express");
 const app = express();
-const port = process.env.port || 3000;
+const PORT = process.env.PORT || 3000;
 const path = require("path");
-const ejs = require("ejs");
+
 //Set static folder
 app.use(express.static(path.join(__dirname, "../", "public")));
 //body-parser middleware
@@ -17,4 +17,4 @@ app.use(
 app.set("views", "src/view"); //change view directory to the src folder
 app.set("view engine", "ejs");
 
-app.listen(port, () => console.log(`Server is listening on the port ${port}`));
+app.listen(PORT, () => console.log(`Server is listening on the port ${PORT}`));
