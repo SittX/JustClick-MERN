@@ -6,3 +6,8 @@ body {
   position: relative;
   margin-left: auto;
 }
+.wrapper {
+  background-image: url(../img/download.jpeg);
+  padding: 25px;
+  opacity: 80%;
+}

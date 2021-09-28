@@ -52,10 +52,15 @@
         </div>
       </div>
     </div>
+    <div class="container" style="border: 2px solid red; border-radius:10px; padding: 10px">
+      <p>Note: If you want to look up more details about a specific movie or series, copy the <span style="color: red">"Imdb_ID"</span> number under the poster of the movie or series that you would like to search. <br>
+      Then click on the <span style="color:red">"Details"</span> button and it will open a search box in which you can input the Id that you copied. <br>
+      Paste it in and you're good to go!</p>
+    </div>
     <div class="grid_container">
       <% movies.forEach(movie => { %>
       <div class="grid-items">
-        <h5 style="text-align: center"><%= movie.Title %></h5>
+        <h5 style="text-align: center; color: ghostwhite"><%= movie.Title %></h5>
         <img src="<%=movie.Poster%>" class="poster" style="margin-left: 30%" />
         <p style="text-align: center; margin-top: 10px">
           <span style="color: yellow">Imdb_ID</span> : <%= movie.imdbID %>

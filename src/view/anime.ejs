@@ -11,17 +11,22 @@
   </head>
   <body>
     <%- include('./partials/navbar.ejs') %>
+  <div class="wrapper">
     <div class="container">
       <form action="/anime" method="POST">
         <input
           type="text"
           class="form-control"
           name="anime_name"
-          style="width: 400px; height: 35px"
+          style="width: 400px; height: 35px;"
           placeholder="Search"
         />
       </form>
     </div>
+  </div>
+  <div class="container">
+    <p>Search your favourite anime series/movies and find out about them more!!</p>
+  </div>
     <%- include("./partials/footer.ejs") %> <%- include('./partials/jQuery.ejs')
     %>
   </body>
