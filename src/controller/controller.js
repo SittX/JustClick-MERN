@@ -8,7 +8,9 @@ exports.moviePage = (req, res) => {
 exports.animePage = (req, res) => {
   res.render("anime");
 };
-
+exports.supportPage = (req, res) => {
+  res.render("support");
+};
 exports.movie_result = (req, res) => {
   // console.log(req.body);
   var query = req.body.movie_name;

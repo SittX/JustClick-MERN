@@ -4,17 +4,25 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Movie</title>
+    <title>JustClick | Movie</title>
     <%- include("./partials/css.ejs") %>
     <link rel="stylesheet" href="/css/movie.css" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
   </head>
   <body>
     <%- include("./partials/navbar.ejs") %>
     <div class="container">
       <form action="/movie" method="POST">
-        <input type="text" class="form-control" name="movie_name" />
+        <input
+          type="text"
+          class="form-control"
+          name="movie_name"
+          style="width: 400px; height: 35px"
+          placeholder="Search"
+        />
       </form>
     </div>
-    <%- include("./partials/jQuery.ejs") %>
+    <%- include("./partials/footer.ejs") %> <%- include("./partials/jQuery.ejs")
+    %>
   </body>
 </html>

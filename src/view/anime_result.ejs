@@ -9,14 +9,13 @@
     <link rel="stylesheet" href="/css/result_pages/anime_result.css" />
   </head>
   <body>
-    <%- include('./partials/navbar.ejs') %>
-    <div class="grid_container">
-      <% animes.forEach(anime => { %>
-      <div class="grid-items">
+    <%- include('./partials/navbar.ejs') %> <% animes.forEach(anime => { %>
+    <div class="row" id="grid-items">
+      <div class="col-lg-3">
         <h4 style="text-align: center"><%= anime.title %></h4>
         <img src="<%=anime.image_url%>" class="poster" />
       </div>
-      <div class="grid-items">
+      <div class="col-lg-9">
         <p style="font-size: 20px"><%= anime.synopsis%></p>
         <br />
         <h5>Start Date: <%= anime.start_date%></h5>
@@ -25,9 +24,25 @@
         <h5>For more informations,visit the link down below⬇︎⬇︎</h5>
         <p><%= anime.url %></p>
       </div>
-      <% })%>
     </div>
-
-    <%- include('./partials/jQuery.ejs') %>
+    <% })%> <%- include("./partials/footer.ejs") %> <%-
+    include('./partials/jQuery.ejs') %>
   </body>
 </html>
+<!-- <div class="grid_container">
+  <% animes.forEach(anime => { %>
+  <div class="grid-items">
+    <h4 style="text-align: center"><%= anime.title %></h4>
+    <img src="<%=anime.image_url%>" class="poster" />
+  </div>
+  <div class="grid-items">
+    <p style="font-size: 20px"><%= anime.synopsis%></p>
+    <br />
+    <h5>Start Date: <%= anime.start_date%></h5>
+    <h5>End Date: <%= anime.end_date%></h5>
+    <h5>Rating: <%= anime.rated%></h5>
+    <h5>For more informations,visit the link down below⬇︎⬇︎</h5>
+    <p><%= anime.url %></p>
+  </div>
+  <% })%>
+</div> -->
