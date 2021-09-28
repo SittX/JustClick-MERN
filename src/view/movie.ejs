@@ -11,6 +11,7 @@
   </head>
   <body>
     <%- include("./partials/navbar.ejs") %>
+    <div class="wrapper">
     <div class="container">
       <form action="/movie" method="POST">
         <input
@@ -21,6 +22,13 @@
           placeholder="Search"
         />
       </form>
+    </div>
+  </div>
+    <div class="container">
+      <em style="color:red">
+      Note : There are some crucial features which are still in developing stage. So,there can be a few bugs or inconvenience to your user experience. We are trying to fix it and add new functionalities and features very soon.
+      Sorry for your inconvenience.
+    </em>
     </div>
     <%- include("./partials/footer.ejs") %> <%- include("./partials/jQuery.ejs")
     %>

@@ -18,11 +18,11 @@
       <div class="col-lg-9">
         <p style="font-size: 20px"><%= anime.synopsis%></p>
         <br />
-        <h5>Start Date: <%= anime.start_date%></h5>
-        <h5>End Date: <%= anime.end_date%></h5>
-        <h5>Rating: <%= anime.rated%></h5>
+        <h5><span style="color:green">Start Date</span>: <%= anime.start_date%></h5>
+        <h5><span style="color:red">End Date </span>: <%= anime.end_date%></h5>
+        <h5>Rating: <span style="color:red"><%= anime.rated%></span></h5>
         <h5>For more informations,visit the link down below⬇︎⬇︎</h5>
-        <p><%= anime.url %></p>
+        <p style="color:blue"><%= anime.url %></p>
       </div>
     </div>
     <% })%> <%- include("./partials/footer.ejs") %> <%-

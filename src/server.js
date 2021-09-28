@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const PORT = process.env.PORT || 3000;
 const path = require("path");
-
+require("dotenv").config();
 //Set static folder
 app.use(express.static(path.join(__dirname, "../", "public")));
 //body-parser middleware
