@@ -10,7 +10,57 @@
   </head>
   <body>
     <%- include('./partials/navbar.ejs') %>
+<<<<<<< HEAD
     
+=======
+    <button
+      class="btn btn-danger"
+      data-target="#movie_modal"
+      data-toggle="modal"
+      style="
+        position: sticky;
+        top: 0;
+        padding: 5px;
+        border-radius: 20px;
+        margin-left: 10px;
+        opacity: 50%;
+      "
+    >
+      Details
+    </button>
+    <div class="modal fade" id="movie_modal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-body">
+            <form action="/movie_details" target="_blank" method="POST">
+              <input
+                type="text"
+                class="form-control"
+                name="movie_id"
+                placeholder="Grab the imdbID and put it here!"
+              />
+              <br />
+              <p>
+                <em class="text-danger sm"
+                  >We are working on it to fix the error. Sorry for your
+                  inconvenience
+                </em>
+              </p>
+              <input type="submit" value="Search" class="btn btn-warning" />
+            </form>
+          </div>
+          <!-- <div class="modal-footer">
+            <button data-dismiss="modal">Close</button>
+          </div> -->
+        </div>
+      </div>
+    </div>
+    <div class="container" style="border: 2px solid red; border-radius:10px; padding: 10px">
+      <p>Note: If you want to look up more details about a specific movie or series, copy the <span style="color: red">"Imdb_ID"</span> number under the poster of the movie or series that you would like to search. <br>
+      Then click on the <span style="color:red">"Details"</span> button and it will open a search box in which you can input the Id that you copied. <br>
+      Paste it in and you're good to go!</p>
+    </div>
+>>>>>>> 4ae4680c3e35ca12d57b77eded54aa3fa8aa3724
     <!-- showcase -->
     <div class="grid_container">
       <% movies.forEach(movie => { %>
