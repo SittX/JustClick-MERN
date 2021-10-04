@@ -14,6 +14,19 @@ body {
   margin-left: auto;
   margin-right: auto;
 }
+form {
+  margin-top: 20px;
+}
+.more {
+  font-size: 20px;
+  padding: 5px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  color: black;
+  border: none;
+  border-radius: 10px;
+}
 .grid_container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

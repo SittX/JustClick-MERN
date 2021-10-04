@@ -37,9 +37,8 @@ exports.anime_result = (req, res) => {
 };
 
 exports.movie_details = (req, res) => {
-  // console.log( req.body);
-  model.movie_details(req.body.movie_id).then((data) => {
+  console.log(req.body.ID);
+  model.movie_details(req.body.ID).then((data) => {
     res.render("movie_details", { data });
-    // console.log(data);
   });
 };

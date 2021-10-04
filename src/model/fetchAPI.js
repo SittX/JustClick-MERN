@@ -12,6 +12,7 @@ exports.fetch_movie_api = (query) => {
   return response;
 };
 exports.movie_details = (id) => {
+  console.log(id);
   const uri = `http://www.omdbapi.com/?i=${id}&apikey=${process.env.API_KEY}`;
   const data = fetch(uri);
   return data;

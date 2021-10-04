@@ -28,11 +28,6 @@
       <h4 class="country">Country : <%=data.Country%></h4>
       <h4 class="released_year">Released Year : <%=data.Released%></h4>
     </div>
-    <% data.Ratings.forEach(rating => { %>
-    <div class="rating">
-      <h3><%=rating.Source%></h3>
-      <h4><%=rating.Value%></h4>
-    </div>
-    <% }) %> <%- include("./partials/footer.ejs") %>
+    <%- include("./partials/footer.ejs") %>
   </body>
 </html>
