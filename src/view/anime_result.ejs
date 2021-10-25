@@ -18,31 +18,16 @@
       <div class="col-lg-9">
         <p style="font-size: 20px"><%= anime.synopsis%></p>
         <br />
-        <h5><span style="color:green">Start Date</span>: <%= anime.start_date%></h5>
-        <h5><span style="color:red">End Date </span>: <%= anime.end_date%></h5>
-        <h5>Rating: <span style="color:red"><%= anime.rated%></span></h5>
+        <h5>
+          <span style="color: green">Start Date</span>: <%= anime.start_date%>
+        </h5>
+        <h5><span style="color: red">End Date </span>: <%= anime.end_date%></h5>
+        <h5>Rating: <span style="color: red"><%= anime.rated%></span></h5>
         <h5>For more informations,visit the link down below⬇︎⬇︎</h5>
-        <p style="color:blue"><%= anime.url %></p>
+        <a href="<%= anime.url %>" target="_blank"><%= anime.url %></a>
       </div>
     </div>
     <% })%> <%- include("./partials/footer.ejs") %> <%-
     include('./partials/jQuery.ejs') %>
   </body>
 </html>
-<!-- <div class="grid_container">
-  <% animes.forEach(anime => { %>
-  <div class="grid-items">
-    <h4 style="text-align: center"><%= anime.title %></h4>
-    <img src="<%=anime.image_url%>" class="poster" />
-  </div>
-  <div class="grid-items">
-    <p style="font-size: 20px"><%= anime.synopsis%></p>
-    <br />
-    <h5>Start Date: <%= anime.start_date%></h5>
-    <h5>End Date: <%= anime.end_date%></h5>
-    <h5>Rating: <%= anime.rated%></h5>
-    <h5>For more informations,visit the link down below⬇︎⬇︎</h5>
-    <p><%= anime.url %></p>
-  </div>
-  <% })%>
-</div> -->

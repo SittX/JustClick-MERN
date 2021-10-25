@@ -1,12 +1,19 @@
 const express = require("express");
 const router = express.Router();
-const controller = require("../src/controller/controller");
-router.get("/", controller.welcomePage);
-router.get("/movie", controller.moviePage);
-router.get("/anime", controller.animePage);
-router.get("/support", controller.supportPage);
-router.post("/anime", controller.anime_result);
-router.post("/movie", controller.movie_result);
-
-router.post("/movie_details", controller.movie_details);
+const {
+  welcomePage,
+  moviePage,
+  animePage,
+  supportPage,
+  anime_result,
+  movie_result,
+  movie_details,
+} = require("../src/controller/controller");
+router.get("/", welcomePage);
+router.get("/movie", moviePage);
+router.get("/anime", animePage);
+router.get("/support", supportPage);
+router.post("/anime", anime_result);
+router.post("/movie", movie_result);
+router.post("/movie_details", movie_details);
 module.exports = router;

@@ -29,6 +29,7 @@ exports.anime_result = (req, res) => {
   model
     .fetch_anime_api(query)
     .then((data) => {
+      console.log(data);
       var animes = data.results;
       res.render("anime_result", { animes });
       // console.log(animes);
@@ -37,7 +38,7 @@ exports.anime_result = (req, res) => {
 };
 
 exports.movie_details = (req, res) => {
-  console.log(req.body.ID);
+  // console.log(req.body.ID);
   model.movie_details(req.body.ID).then((data) => {
     res.render("movie_details", { data });
   });
