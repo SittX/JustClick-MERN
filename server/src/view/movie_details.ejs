@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/result_pages/movie_details.css" />
+  </head>
+  <body>
+    <a
+      href="/movie"
+      style="list-style: none; text-decoration: none; color: white"
+      >⬅︎</a
+    >
+    <div class="heading_info">
+      <img src="<%=data.Poster%>" class="poster" />
+
+      <div class="title_info">
+        <h4>Title : <%=data.Title%></h4>
+        <h4>Genre : <%=data.Genre%></h4>
+        <h5>Language : <%=data.Language%></h5>
+      </div>
+    </div>
+    <div class="main_info">
+      <p class="plot"><%=data.Plot%></p>
+      <h4 class="actors">Actors : <%=data.Actors%></h4>
+      <h4 class="country">Country : <%=data.Country%></h4>
+      <h4 class="released_year">Released Year : <%=data.Released%></h4>
+    </div>
+    <%- include("./partials/footer.ejs") %>
+  </body>
+</html>

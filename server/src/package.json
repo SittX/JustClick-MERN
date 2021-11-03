@@ -1,0 +1,28 @@
+{
+  "name": "justclick",
+  "version": "1.0.0",
+  "description": "A movie informations website",
+  "main": "server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kev-prog-debug/JustClick.git"
+  },
+  "author": "Kellot Hermes",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Kev-prog-debug/JustClick/issues"
+  },
+  "homepage": "https://github.com/Kev-prog-debug/JustClick#readme",
+  "dependencies": {
+    "axios": "^0.21.4",
+    "dotenv-types": "^1.0.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "node-localstorage": "^2.2.1",
+    "nodemon": "^2.0.12"
+  }
+}

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JustClick | Movie</title>
+    <%- include("./partials/css.ejs") %>
+    <link rel="stylesheet" href="/css/movie.css" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  </head>
+  <body>
+    <%- include("./partials/navbar.ejs") %>
+    <div class="wrapper">
+    <div class="container">
+      <form action="/movie" method="POST">
+        <input
+          type="text"
+          class="form-control"
+          name="movie_name"
+          style="width: 400px; height: 35px"
+          placeholder="Search"
+        />
+      </form>
+    </div>
+  </div>
+    <div class="container">
+      <em style="color:red">
+      Note : There are some crucial features which are still in developing stage. So,there can be a few bugs or inconvenience to your user experience. We are trying to fix it and add new functionalities and features very soon.
+      Sorry for your inconvenience.
+    </em>
+    </div>
+    <%- include("./partials/footer.ejs") %> <%- include("./partials/jQuery.ejs")
+    %>
+  </body>
+</html>
