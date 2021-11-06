@@ -1,19 +1,16 @@
+const { default: axios } = require("axios");
 const express = require("express");
 const router = express.Router();
 const {
-  welcomePage,
-  moviePage,
-  animePage,
-  supportPage,
-  anime_result,
-  movie_result,
-  movie_details,
+  getTrending,
+  getPopularMovies,
+  searchMovies,
+  searchAnime,
 } = require("../src/controller/controller");
-router.get("/", welcomePage);
-router.get("/movie", moviePage);
-router.get("/anime", animePage);
-router.get("/support", supportPage);
-router.post("/anime", anime_result);
-router.post("/movie", movie_result);
-router.post("/movie_details", movie_details);
+//for welcome page
+router.get("/getTrending/:page", getTrending);
+//for movie page
+router.get("/movie/:page", getPopularMovies);
+router.get("/search/movie/:title", searchMovies);
+router.get("/anime/search/:title", searchAnime);
 module.exports = router;

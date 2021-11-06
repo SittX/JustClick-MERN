@@ -3,7 +3,7 @@ const Navbar = () => {
   return (
     <nav
       className="navbar navbar-expand-sm bg-dark"
-      style={{ width: "100%", padding: " 3px 10px" }}
+      style={{ width: "100%", zIndex: "10000" }}
     >
       <Link to="/" className="navbar-brand">
         <span>Just</span> <span style={{ color: "red" }}>Click</span>
@@ -11,11 +11,11 @@ const Navbar = () => {
       <button
         className="navbar-toggler"
         type="button"
-        dataToggle="collapse"
-        dataTarget="#navbar_collapse"
-        ariaControls="navbarNavDropdown"
-        ariaExpanded="false"
-        ariaLabel="Toggle navigation"
+        data-toggle="collapse"
+        data-target="#navbar_collapse"
+        aria-controls="navbarNavDropdown"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
       >
         <span className="text-primary">More</span>
       </button>

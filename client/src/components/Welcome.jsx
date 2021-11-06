@@ -1,4 +1,19 @@
+import useFetch from "../useFetch";
+import { useEffect, useState } from "react";
+import { Link, Route } from "react-router-dom";
+import { Loading } from "react-loading-dot";
+import { v4 } from "uuid";
 const Welcome = () => {
+  const [page, setPage] = useState(1);
+  const { data, isLoading } = useFetch(
+    `http://localhost:3001/getTrending/${page}`
+  );
+  //add new data to the previous array and rerender all the prev one and current one
+  // const [posts, setPosts] = useState([]);
+  // useEffect(() => {
+  //   if (data !== "") setPosts([...posts, data]);
+  // }, [data]);
+
   return (
     <div>
       <div className="wrapper">
@@ -25,27 +40,37 @@ const Welcome = () => {
               would save up a ton of your time.
             </p>
           </div>
-          <div
-            className="container"
-            style={{
-              marginTop: "20px",
-              border: "1px black",
-              borderRadius: "20px",
-              boxShadow: " 15px 10px 2px #333",
-              backgroundColor: "black",
-            }}
-          >
-            <p>There are pages for different genres and categories.</p>
-            <p>
-              If you are searching for international movies and TV series, you
-              can find it at <span style={{ color: "red" }}>"Movie"</span>
-              page.
-            </p>
-            <p>
-              If that is not what you are looking for, then you can look up at
-              <span style={{ color: "red" }}>"Anime"</span> page.
-            </p>
+          <h3>Trending now</h3>
+          <div className="trending-posts-container">
+            {isLoading ? (
+              <Loading />
+            ) : (
+              data !== "" &&
+              data.results.map((post) => {
+                return (
+                  <Link
+                    key={v4()}
+                    to={{
+                      pathname: post.title
+                        ? `/${post.title}`
+                        : `${post.original_name}`,
+                      state: { ...post },
+                    }}
+                  >
+                    <div className="grid-items">
+                      <img
+                        className="poster"
+                        src={`https://image.tmdb.org/t/p/original/${post.poster_path}`}
+                        alt=""
+                      />
+                      <h4>{post.title ? post.title : post.original_name}</h4>
+                    </div>
+                  </Link>
+                );
+              })
+            )}
           </div>
+          {page < 2 ? <button onClick={() => setPage(2)}>More</button> : ""}
         </div>
       </div>
     </div>

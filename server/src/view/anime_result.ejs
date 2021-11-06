@@ -5,11 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Anime</title>
-    <%- include('./partials/css.ejs') %>
     <link rel="stylesheet" href="/css/result_pages/anime_result.css" />
   </head>
   <body>
-    <%- include('./partials/navbar.ejs') %> <% animes.forEach(anime => { %>
     <div class="row" id="grid-items">
       <div class="col-lg-3">
         <h4 style="text-align: center"><%= anime.title %></h4>
@@ -27,7 +25,5 @@
         <a href="<%= anime.url %>" target="_blank"><%= anime.url %></a>
       </div>
     </div>
-    <% })%> <%- include("./partials/footer.ejs") %> <%-
-    include('./partials/jQuery.ejs') %>
   </body>
 </html>

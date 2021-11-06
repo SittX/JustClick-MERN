@@ -26,3 +26,85 @@ nav {
   background-clip: border-box;
   background-attachment: fixed;
 }
+/* welcome_page_trending section */
+.trending-posts-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 15px;
+}
+.grid-items {
+  box-sizing: border-box;
+}
+.poster {
+  width: 10rem;
+  height: 250px;
+}
+
+/* details page  */
+.details_page_container {
+  color: black;
+  margin: 2rem;
+  display: flex;
+  justify-content: space-evenly;
+}
+.details_poster {
+  width: 14rem;
+  height: 350px;
+  border-radius: 5px;
+}
+.details {
+  margin-left: 2rem;
+}
+.card {
+  position: absolute;
+  top: 0;
+  margin-top: 8rem;
+  margin-left: 2rem;
+  margin-right: 2rem;
+  border: #333 solid 1.5px;
+  border-radius: 20px;
+  backdrop-filter: blur(100px);
+  background: transparent;
+}
+.poster_banner {
+  width: 100%;
+}
+.overview {
+  font-size: 1.25rem;
+}
+.movie_title {
+  text-align: center;
+}
+/* movie page */
+.page_banner {
+  height: 450px;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+/* anime page */
+.navbar-nav {
+  position: relative;
+  margin-left: auto;
+}
+.poster {
+  display: block;
+  width: 250px;
+  height: 300px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  box-shadow: 7px 6px grey;
+}
+/* .grid_container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-rows: minmax(100px, auto);
+  margin-top: 2rem;
+} */
+#grid-items {
+  border-bottom: solid 2px black;
+  padding: 10px;
+}
