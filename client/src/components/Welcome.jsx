@@ -56,6 +56,7 @@ const Welcome = () => {
                         : `${post.original_name}`,
                       state: { ...post },
                     }}
+                    className="movie_container"
                   >
                     <div className="grid-items">
                       <img
@@ -63,7 +64,9 @@ const Welcome = () => {
                         src={`https://image.tmdb.org/t/p/original/${post.poster_path}`}
                         alt=""
                       />
-                      <h4>{post.title ? post.title : post.original_name}</h4>
+                      <h4 className="movie_title">
+                        {post.title ? post.title : post.original_name}
+                      </h4>
                     </div>
                   </Link>
                 );

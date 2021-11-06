@@ -4,9 +4,10 @@ import { v4 } from "uuid";
 import { useState } from "react";
 import { Loading } from "react-loading-dot/lib";
 const Movie = () => {
-  //put the input form in a separate component to reduce code repetition
-  const [page, setPage] = useState(1);
-  const { data, isLoading } = useFetch(`http://localhost:3001/movie/${page}`);
+  const [pages, setPages] = useState(0);
+  const { data, isLoading, setIsLoading } = useFetch(
+    `http://localhost:3001/movie`
+  );
 
   //state and funcs for the search movies
   const [input, setInput] = useState("");
@@ -19,31 +20,47 @@ const Movie = () => {
     const response = await fetch(`http://localhost:3001/search/movie/${input}`);
     const data = await response.json();
     const posts = data.results;
-    const page = data.page;
+    setPages(data.total_pages);
     setResultPosts(posts);
   };
+
+  //PAGINATION FOR RESULTS
+  const nextPage = async (page) => {
+    setIsLoading(true);
+    const response = await fetch(
+      `http://localhost:3001/search/movie/${input}/${page}`
+    );
+    const data = await response.json();
+    setResultPosts(data.results);
+    setIsLoading(false);
+  };
+  //Can't use for loop inside of the  return function.So,loop through the total page numbers and pushed it to the 'pages_count' to create an array.So,we can use 'map' func for the total_pages
+  const pages_count = [];
+  for (let i = 1; i <= pages; i++) {
+    pages_count.push(i);
+  }
   return (
     <div>
-      {data && (
+      {resultPosts == null ? (
+        data && (
+          <div
+            style={{
+              backgroundImage: `url(https://image.tmdb.org/t/p/original/${
+                data.results[Math.round(Math.random() * 5)].backdrop_path
+              })`,
+            }}
+            className="page_banner"
+          ></div>
+        )
+      ) : (
         <div
           style={{
-            backgroundImage: `url(https://image.tmdb.org/t/p/original/${data.results[0].backdrop_path})`,
+            backgroundImage: `url(https://image.tmdb.org/t/p/original/${
+              resultPosts[Math.round(Math.random() * 5)].backdrop_path
+            })`,
           }}
           className="page_banner"
-        >
-          <p
-            style={{
-              marginLeft: "2rem",
-              marginRight: "5rem",
-              marginTop: "15rem",
-              position: "absolute",
-              padding: "20px",
-              backdropFilter: "blur(20px)",
-            }}
-          >
-            {data.results[0].overview}
-          </p>
-        </div>
+        ></div>
       )}
 
       <form onSubmit={handleSubmit} className="input-form">
@@ -77,6 +94,7 @@ const Movie = () => {
                         : `${post.original_name}`,
                       state: { ...post },
                     }}
+                    className="movie_container"
                   >
                     <div className="grid-items">
                       <img
@@ -84,7 +102,9 @@ const Movie = () => {
                         src={`https://image.tmdb.org/t/p/original/${post.poster_path}`}
                         alt=""
                       />
-                      <h4>{post.title ? post.title : post.original_name}</h4>
+                      <h4 className="movie_title">
+                        {post.title ? post.title : post.original_name}
+                      </h4>
                     </div>
                   </Link>
                 );
@@ -106,6 +126,7 @@ const Movie = () => {
                       : `${post.original_name}`,
                     state: { ...post },
                   }}
+                  className="movie_container"
                 >
                   <div className="grid-items">
                     <img
@@ -113,15 +134,23 @@ const Movie = () => {
                       src={`https://image.tmdb.org/t/p/original/${post.poster_path}`}
                       alt=""
                     />
-                    <h4>{post.title ? post.title : post.original_name}</h4>
+                    <h4 className="movie_title">
+                      {post.title ? post.title : post.original_name}
+                    </h4>
                   </div>
                 </Link>
               );
             })}
           </div>
+          {pages_count.map((page) => {
+            return (
+              <div key={v4()}>
+                <button onClick={() => nextPage(page)}>{page}</button>
+              </div>
+            );
+          })}
         </div>
       )}
-      <button onClick={() => setPage(2)}>More</button>
     </div>
   );
 };

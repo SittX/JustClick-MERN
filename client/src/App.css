@@ -72,31 +72,34 @@ nav {
 .overview {
   font-size: 1.25rem;
 }
+.movie_container {
+  text-decoration: none !important;
+}
 .movie_title {
   text-align: center;
+  color: whitesmoke;
+}
+.movie_title:hover {
+  color: aqua;
 }
 /* movie page */
 .page_banner {
-  height: 450px;
-  background-position: center;
-  background-size: contain;
-  background-repeat: no-repeat;
+  width: 100%;
+  height: 50vh;
+  background-size: cover;
+  background-clip: border-box;
+  background-attachment: fixed;
 }
 
 /* anime page */
-.navbar-nav {
-  position: relative;
-  margin-left: auto;
-}
+
 .poster {
   display: block;
   width: 250px;
   height: 300px;
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 20px;
-  border-radius: 5px;
-  box-shadow: 7px 6px grey;
+  border-radius: 15px;
 }
 /* .grid_container {
   display: grid;
@@ -105,6 +108,7 @@ nav {
   margin-top: 2rem;
 } */
 #grid-items {
+  width: 100%;
   border-bottom: solid 2px black;
   padding: 10px;
 }

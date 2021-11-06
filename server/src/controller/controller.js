@@ -1,4 +1,5 @@
 const axios = require("axios");
+const { response } = require("express");
 
 exports.getTrending = (req, res) => {
   const current_page = req.params.page;
@@ -22,6 +23,8 @@ exports.getPopularMovies = (req, res) => {
 };
 exports.searchMovies = (req, res) => {
   const title = req.params.title;
+  const page = req.params.page;
+  console.log(page);
   axios
     .get(
       `https://api.themoviedb.org/3/search/movie?api_key=91ae970c4115cf1c6aea96715a298e8a&language=en-US&query=${title}&include_adult=false`
@@ -29,6 +32,16 @@ exports.searchMovies = (req, res) => {
     .then((response) => {
       res.send(response.data);
     });
+};
+exports.getNextPage = (req, res) => {
+  console.log("nextpage", req.params.page);
+  const currentPage = req.params.page;
+  const query = req.params.title;
+  axios
+    .get(
+      `https://api.themoviedb.org/3/search/movie?api_key=91ae970c4115cf1c6aea96715a298e8a&language=en-US&query=${query}&page=${currentPage}&include_adult=false`
+    )
+    .then((response) => res.send(response.data));
 };
 exports.searchAnime = (req, res) => {
   const title = req.params.title;

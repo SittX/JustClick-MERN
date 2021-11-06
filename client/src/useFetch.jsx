@@ -13,6 +13,6 @@ const useFetch = (url) => {
     fetchAPI();
   }, [url]);
 
-  return { data, isLoading };
+  return { data, isLoading, setIsLoading };
 };
 export default useFetch;
