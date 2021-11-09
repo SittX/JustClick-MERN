@@ -30,7 +30,7 @@ nav {
 .trending-posts-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-gap: 15px;
+  grid-gap: 1.5rem;
 }
 .grid-items {
   box-sizing: border-box;

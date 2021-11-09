@@ -1,4 +1,3 @@
-import axios from "axios";
 import useFetch from "../useFetch";
 import { useState } from "react";
 const Input = ({ route }) => {

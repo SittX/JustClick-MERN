@@ -49,7 +49,11 @@ const Anime = () => {
                   Rating: <span style={{ color: " red" }}>{anime.rated}</span>
                 </h5>
                 <h5>For more informations,visit the link down below⬇︎⬇︎</h5>
-                <a href={`${anime.url}`} target="_blank">
+                <a
+                  href={`${anime.url}`}
+                  target="_blank"
+                  style={{ wordWrap: "break-word" }}
+                >
                   {anime.url}
                 </a>
               </div>
