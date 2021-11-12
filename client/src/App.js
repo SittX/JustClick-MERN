@@ -7,6 +7,8 @@ import { Route, Switch } from "react-router-dom";
 import Support from "./components/Support";
 import react from "react";
 import Details from "./components/Details";
+import Favourite from "./components/Favourite";
+import MoviesVotes from "./components/MoviesVotes";
 export const appContext = react.createContext();
 const App = () => {
   return (
@@ -18,7 +20,9 @@ const App = () => {
           <Route exact path="/movie" component={Movie} />
           <Route exact path="/anime" component={Anime} />
           <Route exact path="/support" component={Support} />
-          <Route exact path="/:title" component={Details} />
+          <Route exact path="/details/:title" component={Details} />
+          <Route exact path="/favourite" component={Favourite} />
+          <Route exact path="/votes" component={MoviesVotes} />
         </Switch>
       </div>
     </appContext.Provider>

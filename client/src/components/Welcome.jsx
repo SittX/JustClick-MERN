@@ -8,11 +8,6 @@ const Welcome = () => {
   const { data, isLoading } = useFetch(
     `http://localhost:3001/getTrending/${page}`
   );
-  //add new data to the previous array and rerender all the prev one and current one
-  // const [posts, setPosts] = useState([]);
-  // useEffect(() => {
-  //   if (data !== "") setPosts([...posts, data]);
-  // }, [data]);
 
   return (
     <div>
@@ -52,8 +47,8 @@ const Welcome = () => {
                     key={v4()}
                     to={{
                       pathname: post.title
-                        ? `/${post.title}`
-                        : `${post.original_name}`,
+                        ? `/details/${post.title}`
+                        : `/details/${post.original_name}`,
                       state: { ...post },
                     }}
                     className="movie_container"
@@ -73,7 +68,26 @@ const Welcome = () => {
               })
             )}
           </div>
-          {page < 2 ? <button onClick={() => setPage(2)}>More</button> : ""}
+          {page == 2 ? (
+            <button
+              className=" btn btn-primary page_toggle_btn"
+              onClick={() => setPage(1)}
+            >
+              Previous
+            </button>
+          ) : (
+            ""
+          )}
+          {page < 2 ? (
+            <button
+              className="btn btn-primary page_toggle_btn"
+              onClick={() => setPage(2)}
+            >
+              Next
+            </button>
+          ) : (
+            ""
+          )}
         </div>
       </div>
     </div>

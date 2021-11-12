@@ -1,6 +1,5 @@
 const axios = require("axios");
 const { response } = require("express");
-
 exports.getTrending = (req, res) => {
   const current_page = req.params.page;
   axios

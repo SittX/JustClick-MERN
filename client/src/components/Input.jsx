@@ -1,4 +1,3 @@
-import useFetch from "../useFetch";
 import { useState } from "react";
 const Input = ({ route }) => {
   const [input, setInput] = useState("");

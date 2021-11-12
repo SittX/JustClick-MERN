@@ -24,7 +24,7 @@ const Movie = () => {
     setResultPosts(posts);
   };
 
-  //PAGINATION FOR RESULTS
+  //PAGINATION FOR Movie page
   const nextPage = async (page) => {
     setIsLoading(true);
     const response = await fetch(
@@ -90,8 +90,8 @@ const Movie = () => {
                     key={v4()}
                     to={{
                       pathname: post.title
-                        ? `/${post.title}`
-                        : `${post.original_name}`,
+                        ? `/details/${post.title}`
+                        : `/details/${post.original_name}`,
                       state: { ...post },
                     }}
                     className="movie_container"
@@ -122,8 +122,8 @@ const Movie = () => {
                   key={v4()}
                   to={{
                     pathname: post.title
-                      ? `/${post.title}`
-                      : `${post.original_name}`,
+                      ? `/details/${post.title}`
+                      : `/details/${post.original_name}`,
                     state: { ...post },
                   }}
                   className="movie_container"
