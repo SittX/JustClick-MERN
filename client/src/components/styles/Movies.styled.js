@@ -52,4 +52,10 @@ export const Form = styled.form`
   }
 `;
 
-export const MoviesWrapper = styled.div``;
+export const MoviesWrapper = styled.div`
+  & h3 {
+    margin: 20px 0 20px 30px;
+    font-size: 24px;
+    font-weight: 400;
+  }
+`;
