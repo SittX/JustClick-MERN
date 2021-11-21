@@ -22,7 +22,7 @@ const Navbar = () => {
       <div className="collapse navbar-collapse" id="navbar_collapse">
         <ul className="navbar-nav">
           <li className="nav-item">
-            <Link to="/movie" className="nav-link">
+            <Link to="/movies" className="nav-link">
               Movie
             </Link>
           </li>

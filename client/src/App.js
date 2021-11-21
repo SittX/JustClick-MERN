@@ -1,7 +1,7 @@
 import "./App.css";
 import Navbar from "./components/Navbar";
 import Welcome from "./components/Welcome";
-import Movie from "./components/Movie";
+import Movies from "./components/Movies";
 import Anime from "./components/Anime";
 import { Route, Switch } from "react-router-dom";
 import Support from "./components/Support";
@@ -17,7 +17,7 @@ const App = () => {
         <Navbar />
         <Switch>
           <Route exact path="/" component={Welcome} />
-          <Route exact path="/movie" component={Movie} />
+          <Route exact path="/movies" component={Movies} />
           <Route exact path="/anime" component={Anime} />
           <Route exact path="/support" component={Support} />
           <Route exact path="/details/:title" component={Details} />

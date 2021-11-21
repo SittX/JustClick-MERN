@@ -3,6 +3,19 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import firestore from "../firebaseConfig";
 import { collection, getDocs, addDoc } from "firebase/firestore";
+import {
+  Container,
+  PageBanner,
+  Card,
+  DetailsWrapper,
+  Poster,
+  Article,
+  MovieTitle,
+  Overview,
+  AirDate,
+  Rating,
+  Button,
+} from "./styles/Details.styled";
 const Details = () => {
   const location = useLocation();
   const data = location.state;
@@ -36,43 +49,36 @@ const Details = () => {
   const favouriteCollection = collection(firestore, "favouriteMovies");
   const addWatchLater = async () => {
     const response = await addDoc(favouriteCollection, data);
-    console.log(response);
   };
   return (
-    <div>
+    <Container>
       <Link to="/">Home</Link>
-      <img
-        className="poster_banner"
+      <PageBanner
         src={`https://image.tmdb.org/t/p/original/${data.backdrop_path}`}
-      />
+      ></PageBanner>
 
-      <div className="card">
-        <div className="details_page_container">
-          <img
-            className="details_poster"
+      <Card>
+        <DetailsWrapper>
+          <Poster
             src={`https://image.tmdb.org/t/p/original/${data.poster_path}`}
             alt=""
-          />
-          <article className="details">
-            <h3 className="movie_title">
+          ></Poster>
+          <Article>
+            <MovieTitle>
               {data.title ? data.title : data.original_name}
-            </h3>
-            <p className="overview">{data.overview}</p>
+            </MovieTitle>
+            <Overview>{data.overview}</Overview>
             {data.first_air_date && (
-              <p>First air date : {data.first_air_date}</p>
+              <AirDate>First air date : {data.first_air_date}</AirDate>
             )}
-            <h3>Average : {data.vote_average}</h3>
-          </article>
-        </div>
-        <button onClick={addWatchLater}>Add to favourite</button>
-        <button className="vote_btn" onClick={handle_votes}>
-          ⇧
-        </button>
-        <button className="vote_btn" onClick={handle_votes}>
-          ⇩
-        </button>
-      </div>
-    </div>
+            <Rating>Average : {data.vote_average}</Rating>
+          </Article>
+        </DetailsWrapper>
+        <Button onClick={addWatchLater}>Add to favourite</Button>
+        <Button onClick={handle_votes}>⇧</Button>
+        <Button onClick={handle_votes}>⇩</Button>
+      </Card>
+    </Container>
   );
 };
 export default Details;

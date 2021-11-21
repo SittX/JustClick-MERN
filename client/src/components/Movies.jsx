@@ -3,7 +3,15 @@ import { Link } from "react-router-dom";
 import { v4 } from "uuid";
 import { useState } from "react";
 import { Loading } from "react-loading-dot/lib";
-const Movie = () => {
+import { Movie, MoviesContainer } from "./styles";
+import {
+  Container,
+  PageBanner,
+  MoviesWrapper,
+  Form,
+  Button,
+} from "./styles/Movies.styled";
+const Movies = () => {
   const [pages, setPages] = useState(0);
   const { data, isLoading, setIsLoading } = useFetch(
     `http://localhost:3001/movie`
@@ -40,47 +48,38 @@ const Movie = () => {
     pages_count.push(i);
   }
   return (
-    <div>
+    <Container>
       {resultPosts == null ? (
         data && (
-          <div
+          <PageBanner
             style={{
-              backgroundImage: `url(https://image.tmdb.org/t/p/original/${
-                data.results[Math.round(Math.random() * 5)].backdrop_path
-              })`,
+              backgroundImage: `url(https://image.tmdb.org/t/p/original/${data.results[1].backdrop_path})`,
             }}
-            className="page_banner"
-          ></div>
+          ></PageBanner>
         )
       ) : (
-        <div
+        <PageBanner
           style={{
-            backgroundImage: `url(https://image.tmdb.org/t/p/original/${
-              resultPosts[Math.round(Math.random() * 5)].backdrop_path
-            })`,
+            backgroundImage: `url(https://image.tmdb.org/t/p/original/${resultPosts[1].backdrop_path})`,
           }}
-          className="page_banner"
-        ></div>
+        ></PageBanner>
       )}
 
-      <form onSubmit={handleSubmit} className="input-form">
+      <Form onSubmit={handleSubmit} className="input-form">
         <input
           type="text"
           name="title"
           value={input}
-          className="form-control"
           onChange={handleChange}
           placeholder="Search..."
         />
-        <button type="submit" className="btn btn-danger">
-          Search
-        </button>
-      </form>
+        <Button type="submit">Search</Button>
+      </Form>
 
       {resultPosts == null ? (
-        <div className="popular_movies">
+        <MoviesWrapper>
           <h3>Popular movies & TV shows</h3>
-          <div className="trending-posts-container">
+          <MoviesContainer>
             {isLoading ? (
               <Loading />
             ) : (
@@ -94,9 +93,8 @@ const Movie = () => {
                         : `/details/${post.original_name}`,
                       state: { ...post },
                     }}
-                    className="movie_container"
                   >
-                    <div className="grid-items">
+                    <Movie>
                       <img
                         className="poster"
                         src={`https://image.tmdb.org/t/p/original/${post.poster_path}`}
@@ -105,17 +103,17 @@ const Movie = () => {
                       <h4 className="movie_title">
                         {post.title ? post.title : post.original_name}
                       </h4>
-                    </div>
+                    </Movie>
                   </Link>
                 );
               })
             )}
-          </div>
-        </div>
+          </MoviesContainer>
+        </MoviesWrapper>
       ) : (
-        <div className="search_result">
+        <MoviesWrapper>
           <h3>Search result</h3>
-          <div className="trending-posts-container">
+          <MoviesContainer>
             {resultPosts.map((post) => {
               return (
                 <Link
@@ -126,9 +124,8 @@ const Movie = () => {
                       : `/details/${post.original_name}`,
                     state: { ...post },
                   }}
-                  className="movie_container"
                 >
-                  <div className="grid-items">
+                  <Movie>
                     <img
                       className="poster"
                       src={`https://image.tmdb.org/t/p/original/${post.poster_path}`}
@@ -137,11 +134,11 @@ const Movie = () => {
                     <h4 className="movie_title">
                       {post.title ? post.title : post.original_name}
                     </h4>
-                  </div>
+                  </Movie>
                 </Link>
               );
             })}
-          </div>
+          </MoviesContainer>
           {pages_count.map((page) => {
             return (
               <div key={v4()}>
@@ -149,9 +146,9 @@ const Movie = () => {
               </div>
             );
           })}
-        </div>
+        </MoviesWrapper>
       )}
-    </div>
+    </Container>
   );
 };
-export default Movie;
+export default Movies;

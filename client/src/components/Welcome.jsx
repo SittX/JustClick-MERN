@@ -1,8 +1,17 @@
 import useFetch from "../useFetch";
-import { useEffect, useState } from "react";
-import { Link, Route } from "react-router-dom";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Loading } from "react-loading-dot";
 import { v4 } from "uuid";
+import { Container, PostsContainer, Post } from "./styles";
+import {
+  IntroBg,
+  WebsiteShowCase,
+  TrendingNow,
+  Span,
+  Button,
+} from "./styles/Welcome.styled";
+
 const Welcome = () => {
   const [page, setPage] = useState(1);
   const { data, isLoading } = useFetch(
@@ -10,87 +19,58 @@ const Welcome = () => {
   );
 
   return (
-    <div>
-      <div className="wrapper">
-        <div className="introBg"></div>
-        <div
-          className="container"
-          style={{ marginTop: "15px", lineHeight: "1.5rem" }}
-        >
-          <div
-            className="container"
-            style={{ lineHeight: "2.5rem", fontSize: "25px" }}
-          >
-            <h2 style={{ textAlign: "center" }}>
-              What is <span className="text-primary">Just</span>
-              <span style={{ color: "red" }}>Click</span> ?
-            </h2>
-            <p>
-              JustClick is a website for those who want to find informations of
-              a movie or a TV show with just a few
-              <span style={{ color: "red" }}>"Clicks"</span>. We arranged all of
-              the different movies and TV shows data that are available on the
-              internet in one place. So, that you don't have to go to any
-              trouble of finding it from a ton of websites. We believe that it
-              would save up a ton of your time.
-            </p>
-          </div>
-          <h3>Trending now</h3>
-          <div className="trending-posts-container">
-            {isLoading ? (
-              <Loading />
-            ) : (
-              data !== "" &&
-              data.results.map((post) => {
-                return (
-                  <Link
-                    key={v4()}
-                    to={{
-                      pathname: post.title
-                        ? `/details/${post.title}`
-                        : `/details/${post.original_name}`,
-                      state: { ...post },
-                    }}
-                    className="movie_container"
-                  >
-                    <div className="grid-items">
-                      <img
-                        className="poster"
-                        src={`https://image.tmdb.org/t/p/original/${post.poster_path}`}
-                        alt=""
-                      />
-                      <h4 className="movie_title">
-                        {post.title ? post.title : post.original_name}
-                      </h4>
-                    </div>
-                  </Link>
-                );
-              })
-            )}
-          </div>
-          {page == 2 ? (
-            <button
-              className=" btn btn-primary page_toggle_btn"
-              onClick={() => setPage(1)}
-            >
-              Previous
-            </button>
-          ) : (
-            ""
-          )}
-          {page < 2 ? (
-            <button
-              className="btn btn-primary page_toggle_btn"
-              onClick={() => setPage(2)}
-            >
-              Next
-            </button>
-          ) : (
-            ""
-          )}
-        </div>
-      </div>
-    </div>
+    <Container>
+      <IntroBg></IntroBg>
+
+      <WebsiteShowCase>
+        <h3>
+          What is <Span>Just</Span>
+          <Span red>Click</Span> ?
+        </h3>
+        <p>
+          JustClick is a website for those who want to find informations of a
+          movie or a TV show with just a few
+          <Span red>"Clicks"</Span>. We arranged all of the different movies and
+          TV shows data that are available on the internet in one place. So,
+          that you don't have to go to any trouble of finding it from a ton of
+          websites. We believe that it would save up a ton of your time.
+        </p>
+      </WebsiteShowCase>
+
+      <TrendingNow>Trending now</TrendingNow>
+      <PostsContainer>
+        {isLoading ? (
+          <Loading />
+        ) : (
+          data !== "" &&
+          data.results.map((post) => {
+            return (
+              <Link
+                key={v4()}
+                to={{
+                  pathname: post.title
+                    ? `/details/${post.title}`
+                    : `/details/${post.original_name}`,
+                  state: { ...post },
+                }}
+              >
+                <Post>
+                  <img
+                    src={`https://image.tmdb.org/t/p/original/${post.poster_path}`}
+                    alt=""
+                  />
+                  <h4 className="movie_title">
+                    {post.title ? post.title : post.original_name}
+                  </h4>
+                </Post>
+              </Link>
+            );
+          })
+        )}
+      </PostsContainer>
+      {page < 2 ? <Button onClick={() => setPage(2)}>Next </Button> : ""}
+      {page === 2 ? <Button onClick={() => setPage(1)}>Previous</Button> : ""}
+    </Container>
   );
 };
 export default Welcome;

@@ -1,11 +1,3 @@
-html {
-  scroll-behavior: smooth;
-}
-body {
-  background-color: #1b1b1b;
-  color: white;
-}
-
 /* welcomePage */
 nav {
   padding: 3px 10px !important;
@@ -16,19 +8,7 @@ nav {
   position: relative;
   margin-left: auto;
 }
-.wrapper {
-  overflow: auto;
-  width: 100%;
-  height: 100%;
-}
-.introBg {
-  width: 100%;
-  height: 50vh;
-  background-image: url(./img/netflixBg.jpeg);
-  background-size: cover;
-  background-clip: border-box;
-  background-attachment: fixed;
-}
+
 /* welcome_page_trending section */
 .trending-posts-container {
   display: grid;
