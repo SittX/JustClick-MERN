@@ -8,19 +8,28 @@ export const PageBanner = styled.img`
   width: 100%;
   height: 98vh;
   filter: opacity(35%);
+  @media (max-width: 768px) {
+    height: 100%;
+    margin-bottom: 20px;
+    image-resolution: initial;
+    filter: none;
+  }
 `;
 export const Card = styled.div`
   width: 90%;
   display: block;
   margin-left: auto;
   margin-right: auto;
-  margin-top: -500px;
+  margin-top: -630px;
   z-index: 1000;
   filter: opacity(100%);
   text-align: center;
   padding: 15px;
   border: 2px solid black;
   border-radius: 8px;
+  @media (max-width: 786px) {
+    margin-top: 0;
+  }
 `;
 export const DetailsWrapper = styled.div`
   display: flex;

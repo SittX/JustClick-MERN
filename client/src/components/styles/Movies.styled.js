@@ -17,41 +17,6 @@ export const PageBanner = styled.div`
   }
 `;
 
-export const Button = styled.button`
-  position: absolute;
-  right: 0;
-  border: none;
-  border-radius: 0 15px 15px 0;
-  height: 36px;
-  width: 90px;
-  font-size: 20px;
-  padding: 4px;
-  &:hover {
-    background-color: rgba(0, 0, 0, 0.1);
-    color: rgb(222, 23, 98);
-  }
-`;
-export const Form = styled.form`
-  position: relative;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 20px;
-  width: 618px;
-  height: 40px;
-  & input {
-    padding: 0 15px 0 25px;
-    border-radius: 15px;
-    border: none;
-    height: 36px;
-    width: 100%;
-    font-size: 20px;
-    &:focus {
-      outline: none;
-    }
-  }
-`;
-
 export const MoviesWrapper = styled.div`
   & h3 {
     margin: 20px 0 20px 30px;

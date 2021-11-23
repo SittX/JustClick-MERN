@@ -15,7 +15,7 @@ const MoviesVotes = () => {
       );
     };
     getVotes();
-  }, []);
+  }, [collectionRef]);
 
   return (
     <div>

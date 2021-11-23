@@ -15,7 +15,7 @@ import {
 const Welcome = () => {
   const [page, setPage] = useState(1);
   const { data, isLoading } = useFetch(
-    `http://localhost:3001/getTrending/${page}`
+    `https://justclick-mern.herokuapp.com/getTrending/${page}`
   );
 
   return (

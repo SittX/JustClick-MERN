@@ -1,8 +1,7 @@
 import { useLocation } from "react-router";
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
 import firestore from "../firebaseConfig";
-import { collection, getDocs, addDoc } from "firebase/firestore";
+import { collection, addDoc } from "firebase/firestore";
 import {
   Container,
   PageBanner,
@@ -16,13 +15,14 @@ import {
   Rating,
   Button,
 } from "./styles/Details.styled";
+import { FaHome } from "react-icons/fa";
 const Details = () => {
   const location = useLocation();
   const data = location.state;
 
   //add votes to the firestore
-  const collectionRef = collection(firestore, "movie_votes");
-  const [movies, setMovies] = useState([]);
+  // const collectionRef = collection(firestore, "movie_votes");
+  // const [movies, setMovies] = useState([]);
   //movie obj
   // useEffect(() => {
   //   const addMovie = async () => {
@@ -47,12 +47,15 @@ const Details = () => {
 
   //add to watchLater collection
   const favouriteCollection = collection(firestore, "favouriteMovies");
-  const addWatchLater = async () => {
+  const addToFavourite = async () => {
     const response = await addDoc(favouriteCollection, data);
+    console.log(response);
   };
   return (
     <Container>
-      <Link to="/">Home</Link>
+      <Link to="/movies">
+        <FaHome></FaHome>
+      </Link>
       <PageBanner
         src={`https://image.tmdb.org/t/p/original/${data.backdrop_path}`}
       ></PageBanner>
@@ -74,7 +77,7 @@ const Details = () => {
             <Rating>Average : {data.vote_average}</Rating>
           </Article>
         </DetailsWrapper>
-        <Button onClick={addWatchLater}>Add to favourite</Button>
+        <Button onClick={addToFavourite}>Add to favourite</Button>
         <Button onClick={handle_votes}>⇧</Button>
         <Button onClick={handle_votes}>⇩</Button>
       </Card>

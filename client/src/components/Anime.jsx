@@ -1,10 +1,11 @@
 import { useState } from "react";
-import Input from "./Input";
 import { v4 } from "uuid";
-import { Loading } from "react-loading-dot/lib";
+import { Loading } from "react-loading-dot";
+import { Container, AnimeContainer, Series, Button, Search } from "./styles";
+import { Link } from "react-router-dom";
 const Anime = () => {
   const [input, setInput] = useState("");
-  const [animeShows, setAnimeShows] = useState(null);
+  const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const handleChange = (e) => {
     setInput(e.target.value);
@@ -12,56 +13,43 @@ const Anime = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    const response = await fetch(`http://localhost:3001/anime/search/${input}`);
+    const response = await fetch(
+      `https://justclick-mern.herokuapp.com/anime/search/${input}`
+    );
     const data = await response.json();
-    setAnimeShows(data);
+    setData(data);
     setLoading(false);
   };
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
+    <Container>
+      <Search onSubmit={handleSubmit}>
         <input type="text" value={input} onChange={handleChange} />
-        <button type="submit">Search</button>
-      </form>
-      {loading ? (
-        <Loading />
-      ) : (
-        animeShows &&
-        animeShows.map((anime) => {
-          return (
-            <div className="row" id="grid-items" key={v4()}>
-              <div className="col-lg-3">
-                <h4 style={{ textAlign: "center" }}>{anime.title}</h4>
-                <img src={`${anime.image_url}`} className="poster" />
-              </div>
-              <div className="col-lg-9">
-                <p style={{ fontSize: "20px" }}>{anime.synopsis}</p>
-                <br />
-                <h5>
-                  <span style={{ color: " green" }}>Start Date</span>:{" "}
-                  {anime.start_date}
-                </h5>
-                <h5>
-                  <span style={{ color: "red" }}>End Date </span>:{" "}
-                  {anime.end_date}
-                </h5>
-                <h5>
-                  Rating: <span style={{ color: " red" }}>{anime.rated}</span>
-                </h5>
-                <h5>For more informations,visit the link down below⬇︎⬇︎</h5>
-                <a
-                  href={`${anime.url}`}
-                  target="_blank"
-                  style={{ wordWrap: "break-word" }}
-                >
-                  {anime.url}
-                </a>
-              </div>
-            </div>
-          );
-        })
-      )}
-    </div>
+        <Button type="submit">Search</Button>
+      </Search>
+      <AnimeContainer>
+        {loading ? (
+          <Loading />
+        ) : (
+          data &&
+          data.map((show) => {
+            return (
+              <Link
+                key={v4()}
+                to={{
+                  pathname: `/details/anime/${show.title}`,
+                  state: { ...show },
+                }}
+              >
+                <Series>
+                  <h4>{show.title}</h4>
+                  <img src={show.image_url} alt="" />
+                </Series>
+              </Link>
+            );
+          })
+        )}
+      </AnimeContainer>
+    </Container>
   );
 };
 export default Anime;

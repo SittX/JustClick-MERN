@@ -4,17 +4,12 @@ import { v4 } from "uuid";
 import { useState } from "react";
 import { Loading } from "react-loading-dot/lib";
 import { Movie, MoviesContainer } from "./styles";
-import {
-  Container,
-  PageBanner,
-  MoviesWrapper,
-  Form,
-  Button,
-} from "./styles/Movies.styled";
+import { Button, Search } from "./styles";
+import { Container, PageBanner, MoviesWrapper } from "./styles/Movies.styled";
 const Movies = () => {
   const [pages, setPages] = useState(0);
   const { data, isLoading, setIsLoading } = useFetch(
-    `http://localhost:3001/movie`
+    `https://justclick-mern.herokuapp.com/movie`
   );
 
   //state and funcs for the search movies
@@ -25,7 +20,9 @@ const Movies = () => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch(`http://localhost:3001/search/movie/${input}`);
+    const response = await fetch(
+      `https://justclick-mern.herokuapp.com/search/movie/${input}`
+    );
     const data = await response.json();
     const posts = data.results;
     setPages(data.total_pages);
@@ -36,7 +33,7 @@ const Movies = () => {
   const nextPage = async (page) => {
     setIsLoading(true);
     const response = await fetch(
-      `http://localhost:3001/search/movie/${input}/${page}`
+      `https://justclick-mern.herokuapp.com/search/movie/${input}/${page}`
     );
     const data = await response.json();
     setResultPosts(data.results);
@@ -65,7 +62,7 @@ const Movies = () => {
         ></PageBanner>
       )}
 
-      <Form onSubmit={handleSubmit} className="input-form">
+      <Search onSubmit={handleSubmit}>
         <input
           type="text"
           name="title"
@@ -74,7 +71,7 @@ const Movies = () => {
           placeholder="Search..."
         />
         <Button type="submit">Search</Button>
-      </Form>
+      </Search>
 
       {resultPosts == null ? (
         <MoviesWrapper>

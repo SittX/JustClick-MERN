@@ -4,7 +4,7 @@ exports.getTrending = (req, res) => {
   const current_page = req.params.page;
   axios
     .get(
-      `https://api.themoviedb.org/3/trending/all/day?page=${current_page}&api_key=91ae970c4115cf1c6aea96715a298e8a`
+      `https://api.themoviedb.org/3/trending/all/day?page=${current_page}&api_key=${process.env.API_KEY}`
     )
     .then((response) => {
       res.send(response.data);
@@ -14,7 +14,7 @@ exports.getTrending = (req, res) => {
 exports.getPopularMovies = (req, res) => {
   axios
     .get(
-      `https://api.themoviedb.org/3/trending/movie/day?api_key=91ae970c4115cf1c6aea96715a298e8a`
+      `https://api.themoviedb.org/3/trending/movie/day?api_key=${process.env.API_KEY}`
     )
     .then((response) => {
       res.send(response.data);
@@ -26,7 +26,7 @@ exports.searchMovies = (req, res) => {
   console.log(page);
   axios
     .get(
-      `https://api.themoviedb.org/3/search/movie?api_key=91ae970c4115cf1c6aea96715a298e8a&language=en-US&query=${title}&include_adult=false`
+      `https://api.themoviedb.org/3/search/movie?api_key=${process.env.API_KEY}&language=en-US&query=${title}&include_adult=false`
     )
     .then((response) => {
       res.send(response.data);
@@ -38,7 +38,7 @@ exports.getNextPage = (req, res) => {
   const query = req.params.title;
   axios
     .get(
-      `https://api.themoviedb.org/3/search/movie?api_key=91ae970c4115cf1c6aea96715a298e8a&language=en-US&query=${query}&page=${currentPage}&include_adult=false`
+      `https://api.themoviedb.org/3/search/movie?api_key=${process.env.API_KEY}&language=en-US&query=${query}&page=${currentPage}&include_adult=false`
     )
     .then((response) => res.send(response.data));
 };
