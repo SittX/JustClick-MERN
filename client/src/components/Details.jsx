@@ -53,9 +53,6 @@ const Details = () => {
   };
   return (
     <Container>
-      <Link to="/movies">
-        <FaHome></FaHome>
-      </Link>
       <PageBanner
         src={`https://image.tmdb.org/t/p/original/${data.backdrop_path}`}
       ></PageBanner>

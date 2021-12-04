@@ -1,7 +1,6 @@
 import GlobalStyles from "./components/styles/Global";
 import Navbar from "./components/Navbar";
 import Welcome from "./components/Welcome";
-import Movies from "./components/Movies";
 import Anime from "./components/Anime";
 import AnimeDetails from "./components/AnimeDetails";
 import { Route, Switch } from "react-router-dom";
@@ -10,6 +9,7 @@ import react from "react";
 import Details from "./components/Details";
 import Favourite from "./components/Favourite";
 import MoviesVotes from "./components/MoviesVotes";
+import Movies from "./components/Movies";
 export const appContext = react.createContext();
 const App = () => {
   return (

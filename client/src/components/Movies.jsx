@@ -1,86 +1,127 @@
-import useFetch from "../useFetch";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Loading } from "react-loading-dot/lib";
 import { Link } from "react-router-dom";
 import { v4 } from "uuid";
-import { useState } from "react";
-import { Loading } from "react-loading-dot/lib";
-import { Movie, MoviesContainer } from "./styles";
-import { Button, Search } from "./styles";
-import { Container, PageBanner, MoviesWrapper } from "./styles/Movies.styled";
+import fetchMovies from "../redux/actions/fetchMovies";
+
+import { Button, Search, Movie, MoviesContainer } from "./styles";
+import {
+  Container,
+  PageBanner,
+  MoviesWrapper,
+  Pagination,
+  Page,
+} from "./styles/Movies.styled";
+
 const Movies = () => {
-  const [pages, setPages] = useState(0);
-  const { data, isLoading, setIsLoading } = useFetch(
-    `https://justclick-mern.herokuapp.com/movie`
-  );
-
-  //state and funcs for the search movies
+  const dispatch = useDispatch();
+  const state = useSelector((state) => state);
   const [input, setInput] = useState("");
-  const [resultPosts, setResultPosts] = useState(null);
-  const handleChange = (e) => {
-    setInput(e.target.value);
-  };
-  const handleSubmit = async (e) => {
+  const [pages, setPages] = useState(1);
+  const handleSubmit = (e) => {
     e.preventDefault();
-    const response = await fetch(
-      `https://justclick-mern.herokuapp.com/search/movie/${input}`
+    dispatch(
+      fetchMovies(`https://justclick-mern.herokuapp.com/search/movie/${input}`)
     );
-    const data = await response.json();
-    const posts = data.results;
-    setPages(data.total_pages);
-    setResultPosts(posts);
   };
-
-  //PAGINATION FOR Movie page
+  //PAGINATION
   const nextPage = async (page) => {
-    setIsLoading(true);
-    const response = await fetch(
-      `https://justclick-mern.herokuapp.com/search/movie/${input}/${page}`
+    dispatch(
+      fetchMovies(
+        `https://justclick-mern.herokuapp.com/search/movie/${input}/${page}`
+      )
     );
-    const data = await response.json();
-    setResultPosts(data.results);
-    setIsLoading(false);
   };
   //Can't use for loop inside of the  return function.So,loop through the total page numbers and pushed it to the 'pages_count' to create an array.So,we can use 'map' func for the total_pages
   const pages_count = [];
-  for (let i = 1; i <= pages; i++) {
-    pages_count.push(i);
+  if (state.movies) {
+    if (state.movies.total_pages < 7) {
+      for (let i = 1; i <= state.movies.total_pages; i++) {
+        pages_count.push(i);
+      }
+    } else {
+      for (let i = 1; i <= 7; i++) {
+        pages_count.push(i);
+      }
+    }
   }
   return (
     <Container>
-      {resultPosts == null ? (
-        data && (
+      {state.movies ? (
+        <PageBanner
+          style={{
+            backgroundImage: `url(https://image.tmdb.org/t/p/original/${state.movies.results[1].backdrop_path})`,
+          }}
+        ></PageBanner>
+      ) : (
+        state.trending && (
           <PageBanner
             style={{
-              backgroundImage: `url(https://image.tmdb.org/t/p/original/${data.results[1].backdrop_path})`,
+              backgroundImage: `url(https://image.tmdb.org/t/p/original/${state.trending.results[1].backdrop_path})`,
             }}
           ></PageBanner>
         )
-      ) : (
-        <PageBanner
-          style={{
-            backgroundImage: `url(https://image.tmdb.org/t/p/original/${resultPosts[1].backdrop_path})`,
-          }}
-        ></PageBanner>
       )}
-
       <Search onSubmit={handleSubmit}>
         <input
           type="text"
           name="title"
           value={input}
-          onChange={handleChange}
+          onChange={(e) => setInput(e.target.value)}
           placeholder="Search..."
         />
         <Button type="submit">Search</Button>
       </Search>
-
-      {resultPosts == null ? (
+      {state.loading ? (
+        <Loading />
+      ) : state.movies ? (
+        <MoviesWrapper>
+          <h3>Search result</h3>
+          <MoviesContainer>
+            {state.movies.results.map((post) => {
+              return (
+                <Link
+                  key={v4()}
+                  to={{
+                    pathname: post.title
+                      ? `/details/${post.title}`
+                      : `/details/${post.original_name}`,
+                    state: { ...post },
+                  }}
+                >
+                  <Movie>
+                    <img
+                      className="poster"
+                      src={`https://image.tmdb.org/t/p/original/${post.poster_path}`}
+                      alt=""
+                    />
+                    <h4 className="movie_title">
+                      {post.title ? post.title : post.original_name}
+                    </h4>
+                  </Movie>
+                </Link>
+              );
+            })}
+          </MoviesContainer>
+          <Pagination>
+            {pages_count.map((page) => {
+              return (
+                <div key={v4()}>
+                  <button onClick={() => nextPage(page)}>{page}</button>
+                </div>
+              );
+            })}
+          </Pagination>
+        </MoviesWrapper>
+      ) : (
         <MoviesWrapper>
           <h3>Popular movies & TV shows</h3>
           <MoviesContainer>
-            {isLoading ? (
+            {state.loading ? (
               <Loading />
             ) : (
-              data.results.map((post) => {
+              state.trending.results.map((post) => {
                 return (
                   <Link
                     key={v4()}
@@ -106,43 +147,6 @@ const Movies = () => {
               })
             )}
           </MoviesContainer>
-        </MoviesWrapper>
-      ) : (
-        <MoviesWrapper>
-          <h3>Search result</h3>
-          <MoviesContainer>
-            {resultPosts.map((post) => {
-              return (
-                <Link
-                  key={v4()}
-                  to={{
-                    pathname: post.title
-                      ? `/details/${post.title}`
-                      : `/details/${post.original_name}`,
-                    state: { ...post },
-                  }}
-                >
-                  <Movie>
-                    <img
-                      className="poster"
-                      src={`https://image.tmdb.org/t/p/original/${post.poster_path}`}
-                      alt=""
-                    />
-                    <h4 className="movie_title">
-                      {post.title ? post.title : post.original_name}
-                    </h4>
-                  </Movie>
-                </Link>
-              );
-            })}
-          </MoviesContainer>
-          {pages_count.map((page) => {
-            return (
-              <div key={v4()}>
-                <button onClick={() => nextPage(page)}>{page}</button>
-              </div>
-            );
-          })}
         </MoviesWrapper>
       )}
     </Container>

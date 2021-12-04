@@ -17,8 +17,8 @@ export const PostsContainer = styled.div`
   }
   @media (max-width: 648px) {
     padding: 10px;
-    margin: 0;
-    grid-template-columns: repeat(2, 180px);
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     grid-row-gap: 25px;
     grid-column-gap: 10px;
   }

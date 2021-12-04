@@ -24,3 +24,18 @@ export const MoviesWrapper = styled.div`
     font-weight: 400;
   }
 `;
+
+export const Pagination = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  & div {
+    margin: 4px;
+
+    & button {
+      border: none;
+      border-radius: 4px;
+      width: 20px;
+    }
+  }
+`;
