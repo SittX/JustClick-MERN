@@ -1,7 +1,4 @@
 import { useLocation } from "react-router";
-import { Link } from "react-router-dom";
-import firestore from "../firebaseConfig";
-import { collection, addDoc } from "firebase/firestore";
 import {
   Container,
   PageBanner,
@@ -15,41 +12,29 @@ import {
   Rating,
   Button,
 } from "./styles/Details.styled";
-import { FaHome } from "react-icons/fa";
 const Details = () => {
   const location = useLocation();
   const data = location.state;
 
-  //add votes to the firestore
-  // const collectionRef = collection(firestore, "movie_votes");
-  // const [movies, setMovies] = useState([]);
-  //movie obj
-  // useEffect(() => {
-  //   const addMovie = async () => {
-  //     const response = await addDoc(collectionRef, {
-  //       poster: `https://image.tmdb.org/t/p/original/${data.poster_path}`,
-  //       title: data.title ? data.title : data.original_name,
-  //       up_votes: 0,
-  //       down_votes: 0,
-  //     });
-  //   };
-  //   addMovie();
-  //   const getMovie = async () => {
-  //     const data = await getDocs(collectionRef);
-  //     setMovies(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-  //   };
-  //   getMovie();
-  // }, []);
-  // console.log(movies);
   const handle_votes = () => {
     console.log(handle_votes);
   };
-
-  //add to watchLater collection
-  const favouriteCollection = collection(firestore, "favouriteMovies");
-  const addToFavourite = async () => {
-    const response = await addDoc(favouriteCollection, data);
-    console.log(response);
+  //add to favourite collection
+  const addToFavourite = () => {
+    const movie = {
+      poster_path: data.poster_path,
+      title: data.title ? data.title : data.original_name,
+      overview: data.overview,
+      first_air_date: data.first_air_date,
+      vote_average: data.vote_average,
+    };
+    fetch("https://justclick-mern.herokuapp.com/addToFavourite", {
+      method: "POST",
+      headers: { "Content-type": "application/json" },
+      body: JSON.stringify(movie),
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data));
   };
   return (
     <Container>

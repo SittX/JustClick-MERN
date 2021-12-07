@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Loading } from "react-loading-dot/lib";
 import { Link } from "react-router-dom";
@@ -11,14 +11,13 @@ import {
   PageBanner,
   MoviesWrapper,
   Pagination,
-  Page,
 } from "./styles/Movies.styled";
 
 const Movies = () => {
   const dispatch = useDispatch();
   const state = useSelector((state) => state);
   const [input, setInput] = useState("");
-  const [pages, setPages] = useState(1);
+  // const [pages, setPages] = useState(1);
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(

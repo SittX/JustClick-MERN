@@ -1,5 +1,6 @@
 const axios = require("axios");
 const { response } = require("express");
+const favourites = require("../model/favouriteMovies");
 exports.getTrending = (req, res) => {
   const current_page = req.params.page;
   axios
@@ -47,4 +48,20 @@ exports.searchAnime = (req, res) => {
   axios
     .get(`https://api.jikan.moe/v3/search/anime?q=${title}`)
     .then((response) => res.send(response.data.results));
+};
+exports.addToFavourite = async (req, res) => {
+  const movie = req.body;
+  const response = await favourites.create(movie);
+  res.send("Added to the Favourite!");
+};
+
+exports.getFavourite = async (req, res) => {
+  const response = await favourites.find({});
+  res.send(response);
+};
+
+exports.deleteFavourite = async (req, res) => {
+  const { id } = req.body;
+  const response = await favourites.deleteOne({ _id: id });
+  res.send(response);
 };

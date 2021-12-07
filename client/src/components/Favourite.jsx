@@ -1,25 +1,31 @@
-import { collection, deleteDoc, doc, getDocs } from "@firebase/firestore";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { v4 } from "uuid";
-import firestore from "../firebaseConfig";
 import { Movie, MoviesContainer } from "./styles";
 import { Poster, Container, Button } from "./styles/Favourite.styled";
+import axios from "axios";
 const WatchLater = () => {
-  const favouriteCollection = collection(firestore, "favouriteMovies");
   const [movies, setMovies] = useState([]);
+  let [reRender, setReRender] = useState(0); //This state is setted for the useEffect to reRender everytime, the movie is deleted from the list
+
   useEffect(() => {
     const getMovies = async () => {
-      const data = await getDocs(favouriteCollection);
-      setMovies(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+      const response = await axios.get(
+        "https://justclick-mern.herokuapp.com/favourite"
+      );
+      setMovies(response.data);
     };
     getMovies();
-  }, []);
-  const removeMovies = async (id) => {
-    console.log(id);
-    const movie = await doc(favouriteCollection, id);
-    const response = await deleteDoc(movie);
-    console.log(response);
+  }, [reRender]);
+
+  const removeMovies = (id) => {
+    fetch("https://justclick-mern.herokuapp.com/favourite", {
+      method: "DELETE",
+      headers: { "Content-type": "application/json" },
+      body: JSON.stringify({ id }),
+    })
+      .then((res) => res.json())
+      .then(() => setReRender(++reRender));
   };
   return (
     <Container>
@@ -46,7 +52,7 @@ const WatchLater = () => {
                 </Link>
                 <Button
                   className="btn btn-danger mt-10px"
-                  onClick={() => removeMovies(movie.id)}
+                  onClick={() => removeMovies(movie._id)}
                 >
                   Remove
                 </Button>

@@ -1,4 +1,3 @@
-import useFetch from "../useFetch";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Loading } from "react-loading-dot";
